@@ -16,17 +16,20 @@ pipeline{
                 sh'mvn test'
                 
             }
-            post{
-                always{
-                    emailext(
-                        subject:"Pipeline Status:$
-                        {currentBuild.False }",
-                        body:"The status of the stage is:$
-                        {currentBuild.False}.
-                        Please find attached logs for more details.",
-                        to:"s222618352@deakin.edu.au
-                        )
-        }
+             post{
+                success{
+                    mail to:'s222618352@deakin.edu.au',
+                    subject:'Unit and Integration tests passed',
+                    status:'The unit and integration tests have passed.',
+                    attachLog:true
+                }
+                failure{
+                    mail to:'s222618352@deakin.edu.au',
+                    subject:'Unit and Integration tests failed',
+                    status:'The unit and integration tests have failed.',
+                    attachLog:true
+                }
+            }
         stage(' Code Analysis'){
             steps{
                 //Use SonarQube to analyse code
@@ -41,12 +44,14 @@ pipeline{
             post{
                 success{
                     mail to:'s222618352@deakin.edu.au',
-                    status:'Security Scan have failed.',
+                    subject:'Security Scan  passed',
+                    status:'Security Scan have passed.'
                     attachLog:true
                 }
                 failure{
                     mail to:'s222618352@deakin.edu.au',
-                    status:'Security Scan have failed.',
+                    subject:'Security Scan  failed',
+                    status:'Security Scan have failed.'
                     attachLog:true
                 }
             }
