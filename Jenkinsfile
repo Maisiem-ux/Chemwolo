@@ -17,8 +17,8 @@ pipeline{
             }
             post{
                 success{
-                    mail to:'s222618352@deakin.edu.au'
-                    status:'Unit and Integration tests have failed.'
+                    mail to:'s222618352@deakin.edu.au',
+                    subject:'Unit and Integration tests have failed.See attached logs for more information.',
                     attachLog:true
                 }
                 failure{
