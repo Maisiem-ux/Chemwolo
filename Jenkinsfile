@@ -23,7 +23,7 @@ pipeline{
                 }
                 failure{
                     mail to:'s222618352@deakin.edu.au'
-                    status:'Unit and Integration tests have failed.'
+                    subject:'Unit and Integration tests have failed.See attached logs for more information.',
                     attachLog:true
                 }
             }
@@ -42,12 +42,12 @@ pipeline{
             post{
                 success{
                     mail to:'s222618352@deakin.edu.au',
-                    status:'Security Scan have failed.'
+                    status:'Security Scan have failed.',
                     attachLog:true
                 }
                 failure{
                     mail to:'s222618352@deakin.edu.au',
-                    status:'Security Scan have failed.'
+                    status:'Security Scan have failed.',
                     attachLog:true
                 }
             }
