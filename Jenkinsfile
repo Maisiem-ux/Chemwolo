@@ -1,3 +1,4 @@
+@Library('email-text')_
 pipeline{
     agent any
     
@@ -16,17 +17,15 @@ pipeline{
                 
             }
             post{
-                success{
-                    mail to:'s222618352@deakin.edu.au',
-                    subject:'Unit and Integration tests have failed.',
-                    attachLog:true
-                }
-                failure{
-                    mail to:'s222618352@deakin.edu.au'
-                    subject:'Unit and Integration tests have failed.',
-                    attachLog:true
-                }
-            }
+                always{
+                    emailext(
+                        subject:"Pipeline Status:$
+                        {currentBuild.False }",
+                        body:"The status of the stage is:$
+                        {currentBuild.False}.
+                        Please find attached logs for more details.",
+                        to:"s222618352@deakin.edu.au
+                        )
         }
         stage(' Code Analysis'){
             steps{
