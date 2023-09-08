@@ -30,6 +30,7 @@ pipeline{
                     attachLog:true
                 }
             }
+        }    
         stage(' Code Analysis'){
             steps{
                 //Use SonarQube to analyse code
