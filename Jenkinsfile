@@ -19,14 +19,14 @@ pipeline{
              post{
                 success{
                     mail to:'s222618352@deakin.edu.au',
-                    subject:'Unit and Integration tests passed',
-                    status:'The unit and integration tests have passed.',
+                    subject:'Unit and Integration Tests passed',
+                    status:'The unit and integration Tests have passed.',
                     attachLog:true
                 }
                 failure{
                     mail to:'s222618352@deakin.edu.au',
-                    subject:'Unit and Integration tests failed',
-                    status:'The unit and integration tests have failed.',
+                    subject:'Unit and Integration Tests failed',
+                    status:'The unit and integration Tests have failed.',
                     attachLog:true
                 }
             }
