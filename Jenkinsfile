@@ -1,4 +1,3 @@
-@Library('email-text')_
 pipeline{
     agent any
     
