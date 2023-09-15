@@ -51,7 +51,7 @@ pipeline{
                     to:'s222618352@deakin.edu.au',
                     subject:'Security Scan  passed',
                     body:'Security Scan have passed.'
-                    attachLog:true //attachmentsPattern:'**'/console-log.txt'
+                    attachLog:true 
                     )
                 }
                 failure{
@@ -59,7 +59,7 @@ pipeline{
                     to:'s222618352@deakin.edu.au',
                     subject:'Security Scan  failed',
                     status:'Security Scan have failed.'
-                    attachLog:true // attachmentsPattern:'**/console-log.txt'
+                    attachLog:true 
                     )
                 }
             }
