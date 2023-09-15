@@ -21,26 +21,6 @@ pipeline {
                 echo 'Security Scan'
             }
         }
-        post {
-        success {
-            emailext(
-                subject: "Pipeline Successful",
-                body: "Security Scan  passed.",
-                to: 'maisiem716@gmail.com',
-                attachLog: true
-                // attachmentsPattern: '**/console-log.txt'
-            )
-        }
-        failure {
-            emailext(
-                subject: "Pipeline Failed",
-                body: "Security Scan  failed",
-                to: 'maisiem716@gmail.com',
-                attachLog: true
-                // attachmentsPattern: '**/console-log.txt'
-            )
-        }
-    }
         stage('Deploy to Staging') {
             steps {
                 echo 'Deploy to Staging'
@@ -51,11 +31,17 @@ pipeline {
                 echo 'Integration Tests on Staging'
             }
         }
-        post {
+        stage('Deploy to Production') {
+            steps {
+                echo 'Deploy to Production'
+            }
+        }
+    }
+    post {
         success {
             emailext(
                 subject: "Pipeline Successful",
-                body: "Unit and Integration Tests passed",
+                body: "The Jenkins pipeline completed successfully.",
                 to: 'maisiem716@gmail.com',
                 attachLog: true
                 // attachmentsPattern: '**/console-log.txt'
@@ -64,18 +50,11 @@ pipeline {
         failure {
             emailext(
                 subject: "Pipeline Failed",
-                body: "Unit and Integration Tests failed",
+                body: "The Jenkins pipeline failed. Please check the logs for details.",
                 to: 'maisiem716@gmail.com',
                 attachLog: true
                 // attachmentsPattern: '**/console-log.txt'
             )
         }
     }
-        stage('Deploy to Production') {
-            steps {
-                echo 'Deploy to Production'
-            }
-        }
-    }
-    
 }
