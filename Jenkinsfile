@@ -77,24 +77,5 @@ pipeline {
             }
         }
     }
-    post {
-        success {
-            emailext(
-                subject: "Pipeline Successful",
-                body: "The Jenkins pipeline completed successfully.",
-                to: 'maisiem716@gmail.com',
-                attachLog: true
-                // attachmentsPattern: '**/console-log.txt'
-            )
-        }
-        failure {
-            emailext(
-                subject: "Pipeline Failed",
-                body: "The Jenkins pipeline failed. Please check the logs for details.",
-                to: 'maisiem716@gmail.com',
-                attachLog: true
-                // attachmentsPattern: '**/console-log.txt'
-            )
-        }
-    }
+    
 }
