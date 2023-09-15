@@ -3,65 +3,6 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh'mvn clean package' 
-            }
-        }
-        stage('Unit and Integration Tests') {
-            steps {
-                sh'mvn test'
-            }
-        }
-        stage('Code Analysis') {
-            steps {
-                //Use SonarQube to analyse code
-            }
-        }
-        stage('Security Scan') {
-            steps {
-                //Perform a security scan using SonarQube with the OWASP Plugin
-            }
-        }
-        stage('Deploy to Staging') {
-            steps {
-                // Configure the staging environment to AWS EC2 instance
-            }
-        }
-        stage('Integration Tests on Staging') {
-            steps {
-                //run integration tests on the staging environment
-            }
-        }
-        stage('Deploy to Production') {
-            steps {
-                //run integration tests on the staging environment
-            }
-        }
-    }
-    post {
-        success {
-            emailext(
-                subject: "Pipeline Successful",
-                body: "The Jenkins pipeline completed successfully.",
-                to: 'maisiem716@gmail.com',
-                attachLog: true
-                // attachmentsPattern: '**/console-log.txt'
-            )
-        }
-        failure {
-            emailext(
-                subject: "Pipeline Failed",
-                body: "The Jenkins pipeline failed. Please check the logs for details.",
-                to: 'maisiem716@gmail.com',
-                attachLog: true
-                // attachmentsPattern: '**/console-log.txt'
-            )
-        }
-    }
-}pipeline {
-    agent any
-    stages {
-        stage('Build') {
-            steps {
                 echo 'Building' 
             }
         }
@@ -80,6 +21,26 @@ pipeline {
                 echo 'Security Scan'
             }
         }
+        post {
+        success {
+            emailext(
+                subject: "Pipeline Successful",
+                body: "Security Scan  passed.",
+                to: 'maisiem716@gmail.com',
+                attachLog: true
+                // attachmentsPattern: '**/console-log.txt'
+            )
+        }
+        failure {
+            emailext(
+                subject: "Pipeline Failed",
+                body: "Security Scan  failed",
+                to: 'maisiem716@gmail.com',
+                attachLog: true
+                // attachmentsPattern: '**/console-log.txt'
+            )
+        }
+    }
         stage('Deploy to Staging') {
             steps {
                 echo 'Deploy to Staging'
@@ -90,18 +51,12 @@ pipeline {
                 echo 'Integration Tests on Staging'
             }
         }
-        stage('Deploy to Production') {
-            steps {
-                echo 'Deploy to Production'
-            }
-        }
-    }
-    post {
+        post {
         success {
             emailext(
                 subject: "Pipeline Successful",
-                body: "The Jenkins pipeline completed successfully.",
-                to: 's222618352@deakin.edu.au',
+                body: "Unit and Integration Tests passed",
+                to: 'maisiem716@gmail.com',
                 attachLog: true
                 // attachmentsPattern: '**/console-log.txt'
             )
@@ -109,11 +64,18 @@ pipeline {
         failure {
             emailext(
                 subject: "Pipeline Failed",
-                body: "The Jenkins pipeline failed. Please check the logs for details.",
-                to: 's222618352@deakin.edu.au',
+                body: "Unit and Integration Tests failed",
+                to: 'maisiem716@gmail.com',
                 attachLog: true
                 // attachmentsPattern: '**/console-log.txt'
             )
         }
     }
+        stage('Deploy to Production') {
+            steps {
+                echo 'Deploy to Production'
+            }
+        }
+    }
+    
 }
