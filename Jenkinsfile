@@ -3,22 +3,22 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building' 
+                echo 'Build using Maven' 
             }
         }
         stage('Unit and Integration Tests') {
             steps {
-                echo 'Unit and Integration Tests'
+                echo 'Run Unit and Integration Tests using Selenium'
             }
         }
         stage('Code Analysis') {
             steps {
-                echo 'Code Analysis'
+                echo 'Integrate code analysis using SonarQube'
             }
         }
         stage('Security Scan') {
             steps {
-                echo 'Security Scan'
+                echo 'Use Owasp Zap to identify any vulnerabilities'
             }
         }
         post {
@@ -43,12 +43,12 @@ pipeline {
     }
         stage('Deploy to Staging') {
             steps {
-                echo 'Deploy to Staging'
+                echo 'Deploy to Staging using AWS CLI'
             }
         }
         stage('Integration Tests on Staging') {
             steps {
-                echo 'Integration Tests on Staging'
+                echo 'Run integration tests on staging using JUnit'
             }
         }
         post {
