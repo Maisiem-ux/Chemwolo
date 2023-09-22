@@ -41,6 +41,45 @@ pipeline {
                 echo 'Use Owasp Zap to identify any vulnerabilities'
 
             }
+            post {
+
+        success {
+
+            emailext(
+
+                subject: "Security Scan Successful",
+
+                body: "Security Scan completed successfully.",
+
+                to: 'maisiem716@gmail.com',
+
+                attachLog: true
+
+                // attachmentsPattern: '**/console-log.txt'
+
+            )
+
+        }
+
+        failure {
+
+            emailext(
+
+                subject: "Security Scan Failed",
+
+                body: "Security Scan has failed. Please check the logs for details.",
+
+                to: 'maisiem716@gmail.com',
+
+                attachLog: true
+
+                // attachmentsPattern: '**/console-log.txt'
+
+            )
+
+        }
+
+    }
 
         }
 
@@ -61,30 +100,15 @@ pipeline {
                 echo 'Run integration tests on staging using JUnit'
 
             }
-
-        }
-
-        stage('Deploy to Production') {
-
-            steps {
-
-                echo 'Deploy to Production'
-
-            }
-
-        }
-
-    }
-
-    post {
+            post {
 
         success {
 
             emailext(
 
-                subject: "Pipeline Successful",
+                subject: "Test was Successful",
 
-                body: "The Jenkins pipeline completed successfully.",
+                body: "Test completed successfully.",
 
                 to: 'maisiem716@gmail.com',
 
@@ -100,9 +124,9 @@ pipeline {
 
             emailext(
 
-                subject: "Pipeline Failed",
+                subject: "Test Failed",
 
-                body: "The Jenkins pipeline failed. Please check the logs for details.",
+                body: "Test failed. Please check the logs for details.",
 
                 to: 'maisiem716@gmail.com',
 
@@ -115,5 +139,21 @@ pipeline {
         }
 
     }
+
+        }
+
+        stage('Deploy to Production') {
+
+            steps {
+
+                echo 'Deploy to Production'
+
+            }
+
+        }
+
+    }
+
+    
 
 }
